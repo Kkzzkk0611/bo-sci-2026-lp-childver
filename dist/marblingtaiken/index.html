@@ -36,49 +36,62 @@
             <aside id="controls" aria-label="コントロール">
                 <section>
                     <div class="section-header">
-                        <h2>描画・操作</h2>
+                        <h2><ruby>絵<rt>え</rt></ruby>をかくボタン</h2>
                     </div>
                     <div class="mode-toggle">
-                        <button id="ctrl-mode-paint" class="mode-btn">絵の具を塗る</button>
-                        <button id="ctrl-mode-fluid" class="mode-btn">絵の具を動かす</button>
-                    </div>
-                </section>
-                <section>
-                    <div class="section-header">
-                        <h2>キャンバス操作</h2>
-                    </div>
-                    <button id="clear-canvas-btn" class="control-btn">やりなおし                        
-                    </button>
+                        <button id="ctrl-mode-paint" class="mode-btn">🎨<ruby>絵の具<rt>えのぐ</rt></ruby>をぬる</button>
+                        <button id="ctrl-mode-fluid" class="mode-btn">🌀<ruby>絵の具<rt>えのぐ</rt></ruby>をうごかす</button>
+                    <button id="clear-canvas-btn" class="control-btn">やりなおし</button>
                 </section>
             </aside>
             <main id="stage">
                 <canvas></canvas>
             </main>
         </div>
-        <div id="purpose-message" class="purpose-message">
-            <h3>マーブリング体験をしてみましょう！</h3>
-            <p id="purpose-scroll-hint" class="purpose-scroll-hint">
-                上下にスクロールして続きが読めます
-            </p>
-            <p class="purpose-sub">
-                ① キャンバスに線を描いて、② 絵の具を動かして模様を作ります。
-            </p>
+        <!-- ✅ スタート画面（動画ループ＋はじめる） -->
+        <div id="purpose-message" class="purpose-message purpose-start" role="dialog" aria-label="スタート画面">
+        <h2 class="purpose-title">🎨 えのぐをうごかしてみよう！</h2>
 
+        <!-- ✅ iPad向け：muted + playsinline + loop -->
+        <!-- ★あなたの動画ファイルを video/marbling-demo.mp4 に置いてね -->
+        <div class="purpose-videoWrap">
+            <video id="start-video" class="purpose-video" autoplay loop muted playsinline webkit-playsinline preload="auto">
+            <source src="video/marbling-demo.mp4" type="video/mp4">
+            </video>
+            <div class="purpose-videoHint">（うごいてる えがみえるよ）</div>
+        </div>
+
+        <p class="purpose-sub purpose-sub-simple">
+            ゆびで なぞると<br>
+            えのぐが まざって もようが できるよ
+        </p>
+
+        <div class="purpose-actions">
+            <button id="start-btn" class="purpose-startBtn">はじめる</button>
+            <button id="howto-btn" class="purpose-howtoBtn">あそびかた</button>
+        </div>
+
+        <!-- ✅ あそびかた（最小・読む量を減らす） -->
+        <div id="howto-panel" class="purpose-howtoPanel" hidden>
             <div class="purpose-steps">
-                <figure class="purpose-step">
-                <img src="img/purpose-paint.png" alt="キャンバスをなぞって線を描く様子">
-                <figcaption>1. 「絵の具を塗る」<br>で線を描く</figcaption>
-                </figure>
+            <figure class="purpose-step">
+                <img src="img/purpose-paint.png" alt="ゆびでなぞって えのぐをぬる">
+                <figcaption>①「ぬる」で かいてみよう</figcaption>
+            </figure>
 
-                <div class="purpose-arrow">➜</div>
+            <div class="purpose-arrow">➜</div>
 
-                <figure class="purpose-step">
-                <img src="img/purpose-fluid.png" alt="線が流体のように広がっている様子">
-                <figcaption>2. 「絵の具を動かす」<br>で模様をつくる</figcaption>
-                </figure>
+            <figure class="purpose-step">
+                <img src="img/purpose-fluid.png" alt="えのぐが ひろがって まざる">
+                <figcaption>②「うごかす」で まぜてみよう</figcaption>
+            </figure>
             </div>
 
-            <p class="purpose-hint">キャンバスをタップすると体験がスタートします</p>
+            <p class="purpose-hint">※ いつでも「やりなおし」ができるよ</p>
+        </div>
+
+        <!-- ✅ 画面どこでも開始できる（子どもが押しやすい） -->
+        <p class="purpose-tapHint">（がめんを タップでも はじめられるよ）</p>
         </div>
         <div id="cta-modal" class="cta-modal" style="display: none;">
             <div class="cta-content">

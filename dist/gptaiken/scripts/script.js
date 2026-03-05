@@ -257,7 +257,7 @@ const COMMENT_TABLE = [
   {
     artworkKey: "逃げる",
     date: "12月9日",
-    author: "匿名User",
+    author: "匿名user",
     text: "模様がすごく綺麗で魅力的です！",
   },
   {
@@ -269,7 +269,7 @@ const COMMENT_TABLE = [
   {
     artworkKey: "逃げる",
     date: "12月8日",
-    author: "匿名User",
+    author: "匿名user",
     text: "素敵な絵で、作品に込められた想いがよく伝わってきました。",
   },
   {
@@ -287,31 +287,31 @@ const COMMENT_TABLE = [
   {
     artworkKey: "逃げよう",
     date: "12月9日",
-    author: "匿名User",
+    author: "匿名user",
     text: "防災グッズはまだ用意できてないので、早めに準備したいと思いました！",
   },
   {
-    artworkKey: "液状化",
+    artworkKey: "揺れる水",
     date: "1月7日",
     author: "みのわ",
     text: "説明が専門的でわかりやすく、勉強になりました。",
   },
   {
-    artworkKey: "液状化",
+    artworkKey: "揺れる水",
     date: "1月6日",
-    author: "たけちゃんまま",
+    author: "キリマンジャロ",
     text: "水道管が破裂している様子がよく表現されていて、怖さが伝わりました。",
   },
   {
-    artworkKey: "液状化",
+    artworkKey: "揺れる水",
     date: "1月6日",
-    author: "匿名User",
+    author: "匿名user",
     text: "ローリングストックという言葉は初めて聞いたので調べましたが、防災において大切な行動であると知りました。",
   },
   {
     artworkKey: "空を求めて",
     date: "1月9日",
-    author: "イエローマウンテン",
+    author: "キリマンジャロ",
     text: "背景のピンク色も素敵ですが、光の表現がトクニ美しい。。",
   },
   {
@@ -323,13 +323,13 @@ const COMMENT_TABLE = [
   {
     artworkKey: "空を求めて",
     date: "1月8日",
-    author: "匿名User",
+    author: "匿名user",
     text: "災害時もめげずに空を見上げてポジティブに居たい。適切な避難行動をとります。",
   },
   {
     artworkKey: "もしもの",
     date: "1月9日",
-    author: "匿名User",
+    author: "匿名user",
     text: "川が近いですもんね…。避難場所の確認を改めてしようと思いました！",
   },
   {
@@ -353,7 +353,7 @@ function getArtworkKeyFromMessage(message) {
   // 「大雨」の判定は削除済み
   if (normalized.startsWith("逃げる")) return "逃げる";
   if (normalized.startsWith("逃げよう")) return "逃げよう";
-  if (normalized.startsWith("液状化")) return "液状化";
+  if (normalized.startsWith("揺れる水")) return "揺れる水";
   if (normalized.startsWith("空を求めて")) return "空を求めて";
   if (normalized.startsWith("もしもの")) return "もしもの";
   return null;
@@ -379,13 +379,12 @@ async function loadArtworksFromSurvey() {
 
   const query = surveyLayer.createQuery();
 
-  // 「大雨」を除外し、液状化（危険度含む）やその他を指定
   query.where = `
     Message LIKE '逃げる%' OR 
     Message LIKE 'もしもの%' OR 
     Message LIKE '逃げよう%' OR 
-    Message LIKE '液状化%' OR 
-    Message LIKE '%液状化危険度の高い地域%' OR
+    Message LIKE '揺れる水%' OR 
+    Message LIKE '%揺れる水%' OR
     Message LIKE '空を求めて%'
   `;
 
