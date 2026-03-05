@@ -481,7 +481,7 @@ canvas {
 /* === Mode toggle buttons === */
 .mode-toggle {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 8px;
   margin-bottom: 12px;
 }
@@ -591,7 +591,13 @@ canvas {
   background: #ddd;
   border: none;
   border-radius: 50%;
-  width: 24px;  .cta-modal {
+  width: 24px;
+  height: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+  
+.cta-modal {
       position: fixed;
       top: 0;
       left: 0;
@@ -602,18 +608,14 @@ canvas {
       justify-content: center;
       align-items: center;
       z-index: 1000;
-  }
+}
   
-  .cta-content {
+.cta-content {
       position: relative;
       background: white;
       padding: 20px;
       border-radius: 8px;
       text-align: center;
-  }
-  height: 24px;
-  font-weight: bold;
-  cursor: pointer;
 }
 
 /* タップ時の軽いフィードバック */
@@ -934,4 +936,100 @@ canvas {
 .back-to-home:hover {
     background-color: #0056b3;
     transform: scale(1.05);
+}
+
+/* ===== Start Screen (purpose-message) - video centered ===== */
+.purpose-start {
+  max-width: min(620px, 92vw);
+  text-align: center;
+}
+
+.purpose-title{
+  margin: 0 0 10px 0;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.purpose-videoWrap{
+  margin: 10px auto 6px;
+}
+
+.purpose-video{
+  width: 100%;
+  max-width: 520px;
+  border-radius: 12px;
+  display: block;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.08);
+}
+
+.purpose-videoHint{
+  font-size: 12px;
+  opacity: 0.85;
+  margin-top: 6px;
+}
+
+.purpose-sub-simple{
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 10px 0 14px;
+}
+
+.purpose-actions{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.purpose-startBtn{
+  min-height: 56px;
+  font-size: 20px;
+  font-weight: 800;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  background: #22c55e;
+  color: #fff;
+}
+
+.purpose-startBtn:active{
+  transform: scale(0.98);
+}
+
+.purpose-howtoBtn{
+  min-height: 56px;
+  font-size: 18px;
+  font-weight: 800;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.35);
+  cursor: pointer;
+  background: rgba(255,255,255,0.10);
+  color: #fff;
+}
+
+.purpose-howtoBtn:active{
+  transform: scale(0.98);
+}
+
+.purpose-howtoPanel{
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.18);
+}
+
+.purpose-tapHint{
+  margin-top: 10px;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* 小さい画面はボタン縦並び */
+@media (max-width: 520px) {
+  .purpose-actions{
+    grid-template-columns: 1fr;
+  }
+  .purpose-title{
+    font-size: 20px;
+  }
 }
