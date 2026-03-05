@@ -1771,18 +1771,18 @@ function hashCode (s) {
 // --- Timer for CTA ---
 const EXPERIENCE_DURATION = 15000; // 20 seconds
 
-function showCTA() {
-    const ctaModal = document.getElementById('cta-modal');
-    if (ctaModal) {
-        ctaModal.style.display = 'flex';
-        const ctaButton = document.getElementById('cta-button');
-        if (ctaButton) {
-            ctaButton.addEventListener('click', () => {
-                window.location.href = '/workshop-signup'; // Redirect to workshop page
-            });
-        }
-    }
-}
+// function showCTA() {
+//     const ctaModal = document.getElementById('cta-modal');
+//     if (ctaModal) {
+//         ctaModal.style.display = 'flex';
+//         const ctaButton = document.getElementById('cta-button');
+//         if (ctaButton) {
+//             ctaButton.addEventListener('click', () => {
+//                 window.location.href = '/workshop-signup'; // Redirect to workshop page
+//             });
+//         }
+//     }
+// }
 
 // Debugging enhancements to identify why the modal is not displaying
 // Enhanced showCTAModal function with detailed logging
@@ -1817,8 +1817,8 @@ function showCTAModal() {
 function startExperienceTimer() {
     console.log('Timer started for 30 seconds');
     setTimeout(() => {
-        console.log('Timer finished, calling showCTAModal');
-        showCTAModal();
+        // console.log('Timer finished, calling showCTAModal');
+        // showCTAModal();
     }, 15000); // 30 seconds
 }
 
@@ -1882,7 +1882,7 @@ function showEndScreen() {
     // Display end screen logic
     console.log('Showing end screen');
     config.PAUSED = true;
-    showCTAModal();
+    //showCTAModal();
 }
 
 // Timer and swipe count logic
@@ -1957,15 +1957,72 @@ document.getElementById('back-to-home').addEventListener('click', () => {
 
 // HTML上のモーダルを取得
 const ctaModal = document.getElementById('cta-modal');
-const ctaCloseBtn = ctaModal.querySelector('.cta-close');
 
-// ×ボタンのイベント設定
-if (ctaCloseBtn) {
+if (ctaModal) {
+  const ctaCloseBtn = ctaModal.querySelector('.cta-close');
+
+  if (ctaCloseBtn) {
     ctaCloseBtn.addEventListener('click', () => {
-        console.log('CTA close clicked');
-        ctaModal.style.display = 'none';
+      ctaModal.style.display = 'none';
     });
-    console.log('CTA close button event listener added');
-} else {
-    console.log('CTA close button not found');
+  }
 }
+
+// 画面向きチェック（既存のまま）
+      function enforceLandscape() {
+        const warning = document.getElementById('landscape-warning');
+        if (window.innerHeight > window.innerWidth) warning.style.display = 'flex';
+        else warning.style.display = 'none';
+      }
+      window.addEventListener('resize', enforceLandscape);
+      window.addEventListener('load', enforceLandscape);
+
+      document.getElementById('back-to-home').addEventListener('click', () => {
+        window.location.href = '/bo-sci-2025-lp/';
+      });
+
+      // ✅ スタート画面の開閉（taiken.jsを触らずに実装）
+      const purpose = document.getElementById('purpose-message');
+      const startBtn = document.getElementById('start-btn');
+      const howtoBtn = document.getElementById('howto-btn');
+      const howtoPanel = document.getElementById('howto-panel');
+      const startVideo = document.getElementById('start-video');
+
+      function startExperience() {
+        purpose.style.display = 'none';
+
+        // iOS対策：ユーザー操作後に再生を試みる（失敗してもOK）
+        if (startVideo) {
+          try { startVideo.pause(); } catch (_) {}
+        }
+      }
+
+      startBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        startExperience();
+      });
+
+      // 「あそびかた」開閉
+      howtoBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isHidden = howtoPanel.hasAttribute('hidden');
+        if (isHidden) howtoPanel.removeAttribute('hidden');
+        else howtoPanel.setAttribute('hidden', '');
+      });
+
+      // 画面どこでも開始（ボタン以外を押したら開始）
+      purpose.addEventListener('click', (e) => {
+        // howto内のクリックは開始にしない
+        if (e.target.closest('#howto-panel')) return;
+        // 「あそびかた」ボタンは開始にしない
+        if (e.target.closest('#howto-btn')) return;
+        startExperience();
+      });
+
+      // iPadで動画が止まる場合の保険：タップで再生を試す
+      if (startVideo) {
+        startVideo.addEventListener('click', (e) => {
+          e.stopPropagation();
+          try { startVideo.play(); } catch (_) {}
+        });
+      }
